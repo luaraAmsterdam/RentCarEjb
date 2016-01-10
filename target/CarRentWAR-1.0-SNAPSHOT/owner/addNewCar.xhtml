@@ -1,0 +1,65 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+
+    <head>
+        <title>New car</title>
+        <link type="text/css" rel="stylesheet" href="/resources/css/jsfcrud.css?ln=css" />
+    </head>
+    <body>
+        <div>
+            <h:form>
+                <h:panelGrid columns="3">
+                    <br/>
+                    <h:outputLabel value="VIN" />
+                    <h:inputText id="vin" value="#{addNewCarBean.car.vin}" 
+                                 required="true" size="20" requiredMessage="Please, fill this field.">  
+                    </h:inputText>
+                    <h:message for="vin" class="error_message" />
+                    
+                    
+                    <h:outputLabel value="mark" />
+                    <h:inputText id="mark" value="#{addNewCarBean.car.mark}" 
+                                 required="true" size="20" requiredMessage="Please, fill this field.">  
+                    </h:inputText>
+                    <h:message for="mark" class="error_message" />
+                    
+                    <h:outputLabel value="model" />
+                    <h:inputText id="model" value="#{addNewCarBean.car.model}" 
+                                 required="true" size="20" requiredMessage="Please, fill this field.">  
+                    </h:inputText>
+                    <h:message for="model" class="error_message" />
+                    
+                    <h:outputLabel value="volume" />
+                    <h:inputText id="volume" value="#{addNewCarBean.car.volume}" 
+                                 required="true" size="20" requiredMessage="Please, fill this field.">  
+                    </h:inputText>
+                    <h:message for="volume" class="error_message" />
+                    
+                    <h:outputLabel value="powerc" />
+                    <h:inputText id="powerc" value="#{addNewCarBean.car.powerc}" 
+                                 required="true" size="20" requiredMessage="Please, fill this field.">  
+                    </h:inputText>
+                    <h:message for="powerc" class="error_message" />
+                    
+                    <h:outputLabel value="color" />
+                    <h:inputText id="color" value="#{addNewCarBean.car.color}" 
+                                 required="true" size="20" requiredMessage="Please, fill this field.">  
+                    </h:inputText>
+                    <h:message for="color" class="error_message" />
+                    
+                    <h:outputLabel value="cost" />
+                    <h:inputText id="cost" value="#{addNewCarBean.car.cost}" 
+                                 required="true" size="20" requiredMessage="Please, fill this field.">  
+                    </h:inputText>
+                    <h:message for="cost" class="error_message" />
+                    <br/>
+                </h:panelGrid>
+                <h:commandButton action="#{addNewCarBean.create(loginBean.currentUser)}" value="  Add  "/>    
+            </h:form>
+            <br/>
+            <h:button value="Back" outcome="/owner/ownerCars.xhtml" />
+        </div>
+    </body>
+</html>

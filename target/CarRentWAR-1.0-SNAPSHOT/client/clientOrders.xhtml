@@ -1,0 +1,83 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <head>
+        <title>My orders</title>
+        <link type="text/css" rel="stylesheet" href="/resources/css/jsfcrud.css?ln=css" />
+        <style type="text/css">
+            tab1 { padding-left: 4em; }
+            tab2 { padding-left: 8em; }
+        </style>
+    </head>
+    <body>
+        <h3>Your orders:</h3>
+        <div>
+            <h:dataTable value="#{serviceBean.getOrdersForClient(loginBean.currentUser)}" var="req">
+                <h:column>
+                    <f:facet name="header">id</f:facet>
+                        #{req.id}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">mark</f:facet>
+                        #{req.idCar.mark}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">model</f:facet>
+                        #{req.idCar.model}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">from</f:facet>
+                        #{req.dateFrom}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">to</f:facet>
+                        #{req.dateTo}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">insurer approve</f:facet>
+                        #{req.insurerApprove}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">owner approve</f:facet>
+                        #{req.ownerApprove}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">status</f:facet>
+                        #{req.carStatus}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">result cost</f:facet>
+                        #{req.resultCost}
+                </h:column>
+                
+            </h:dataTable>
+        </div>
+       
+        <br/><br/><hr/>
+        <div>
+            <h3>Choose order id to get or to return car. </h3>
+            <h:form>
+                <h:panelGrid columns="3">
+                    <h:outputLabel value="Order id: " />
+                    <h:selectOneMenu value="#{editCarStatusBean.order}"
+                                    converter="#{carRentConverterBean}">
+                       <f:selectItems value="#{serviceBean.getOrdersForClient(loginBean.currentUser)}" var="r"
+                                      itemLabel="#{r.toString()}" itemValue="#{r}" />
+                   </h:selectOneMenu>
+                    <br/><br/>
+                    <h:commandButton action="#{editCarStatusBean.takeCar()}" value="  Get   "/>
+                   <tab1/>
+                   <h:commandButton action="#{editCarStatusBean.returnCar()}" value=" Return "/>
+                 </h:panelGrid>
+            </h:form>
+            <br/>
+        </div>
+        
+         <br/><hr/>
+         <h3>Create new order. </h3>
+        <h:button value="create" outcome="/client/createNewOrder.xhtml" />
+    </body>
+</html>

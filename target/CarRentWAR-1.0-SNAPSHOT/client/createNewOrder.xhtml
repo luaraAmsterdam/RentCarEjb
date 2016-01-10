@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+
+    <head>
+        <title>New order</title>
+        <link type="text/css" rel="stylesheet" href="/resources/css/jsfcrud.css?ln=css" />
+    </head>
+    <body>
+        <h3> Choose car </h3>
+        <div>
+            <h:dataTable value="#{serviceBean.getAllCar()}" var="req">
+                <h:column>
+                    <f:facet name="header">id</f:facet>
+                        #{req.id}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">mark</f:facet>
+                        #{req.mark}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">model</f:facet>
+                        #{req.model}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">color</f:facet>
+                        #{req.color}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">power</f:facet>
+                        #{req.powerc}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">volume</f:facet>
+                        #{req.volume}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">cost</f:facet>
+                        #{req.cost}
+                </h:column>
+                
+            </h:dataTable>
+        </div>
+        <h3> Choose car </h3>
+        <div>
+            <h:dataTable value="#{serviceBean.getAllInsurance()}" var="req">
+                <h:column>
+                    <f:facet name="header">id</f:facet>
+                        #{req.id}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">type</f:facet>
+                        #{req.type}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">cost</f:facet>
+                        #{req.cost}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">name</f:facet>
+                        #{req.idInsurer.name}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">id</f:facet>
+                        #{req.id}
+                </h:column>
+            </h:dataTable>
+        </div>
+        <div>
+            <h:form>
+                <h:panelGrid columns="3">
+                    <h:outputLabel value="From" />
+                    <h:inputText id="startDate" value="#{createNewOrderBean.request.dateFrom}" 
+                                 required="true" size="11" requiredMessage="Please, fill this field.">  
+                        <f:convertDateTime pattern="yyyy-MM-dd"/>  
+                    </h:inputText>
+                    <h:message for="startDate" class="error_message" />
+
+                    <h:outputLabel value="To" />
+                    <h:inputText id="endDate" value="#{createNewOrderBean.request.dateTo}" 
+                                 required="true" size="11" requiredMessage="Please, fill this field.">  
+                        <f:convertDateTime pattern="yyyy-MM-dd"/>  
+                    </h:inputText>
+                    <h:message for="endDate" class="error_message" />
+
+                    
+                    <h:outputLabel value="Car id:" />
+                    <h:selectOneMenu value="#{createNewOrderBean.request.idCar}"
+                                     converter="#{carConverterBean}">
+                        <f:selectItems value="#{serviceBean.getAllCar()}" var="r"
+                                       itemLabel="#{r.toString()}" itemValue="#{r}" />
+                    </h:selectOneMenu>
+                    <h:outputLabel value="Insurance id:" />
+                    <h:selectOneMenu value="#{createNewOrderBean.request.idInsurance}"
+                                     converter="#{insuranceConverterBean}">
+                        <f:selectItems value="#{serviceBean.getAllInsurance()}" var="r"
+                                       itemLabel="#{r.toString()}" itemValue="#{r}" />
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <h:commandButton action="#{createNewOrderBean.create(loginBean.currentUser)}" value="Create"/>    
+            </h:form>
+            <br/>
+            <h:button value="Back" outcome="/client/clientOrders.xhtml" />
+        </div>
+    </body>
+</html>
